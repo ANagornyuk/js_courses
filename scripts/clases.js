@@ -15,24 +15,44 @@ function Circle(radius){
 }
 
 function Area(){
-	this._figures = [];
+	this._figures = new Array();
 	var self = this;
 	this.addFigure = function(figure) {
-		self._figures[_figures.length] = figure;
+		self._figures[self._figures.length] = figure;
 	}
 	this.clear = function() {
-		self._figures.lenght = 0;
+		self._figures.length = 0;
 	}
+	/*
+	this.getSize = function () {
+		var size = 0;
+		for (var i=0; i<self._figures.length;i++){
+			size += self._figures[i].getArea();
+		}
+		return size;
+	}
+	*/
+	Object.defineProperty(this, "size", {	
+  		get: function() {
+  			var yardage = 0;
+  			for (var i=0; i<this._figures.length; i++){
+  				yardage += this._figures[i].getArea();
+  			}
+    		return yardage;
+ 		}
+	});
 }
 
-
+/*
 var area = new Area(); 
-Object.defineProperty(area, "size", {
+
+Object.defineProperty(area, "size", {	
   get: function() {
   	var yardage = 0;
-  	for (var i in this._figures){
-  		yardage += i.getArea();
+  	for (var i=0; i<this._figures.length; i++){
+  		yardage += this._figures[i].getArea();
   	}
     return yardage;
   }
 });
+*/
